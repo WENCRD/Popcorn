@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* ===== Loader pulsant ===== */
+  .loader {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 6rem;
+    aspect-ratio: 1 / 1;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+  .loader::before,
+  .loader::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    animation: pulsOut 3s ease-in-out infinite;
+    /* prend la couleur de texte du parent */
+    filter: drop-shadow(0 0 1rem rgba(255, 255, 255, 0.75));
+  }
+  .loader::before {
+    inset: 0;
+    /* currentColor pour thème clair/sombre */
+    box-shadow: inset 0 0 0 1rem currentColor;
+    animation-name: pulsIn;
+  }
+  .loader::after {
+    inset: 1rem;
+    box-shadow: 0 0 0 0 currentColor;
+  }
+  @keyframes pulsIn {
+    0% { box-shadow: inset 0 0 0 1rem currentColor; opacity: 1; }
+    50%,100% { box-shadow: inset 0 0 0 0 currentColor; opacity: 0; }
+  }
+  @keyframes pulsOut {
+    0%,50% { box-shadow: 0 0 0 0 currentColor; opacity: 0; }
+    100%   { box-shadow: 0 0 0 1rem currentColor; opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .loader::before, .loader::after { animation: none !important; }
+  }
+
+  /* ===== Bouton + icône loupe animée ===== */
+  .search-btn { position: relative; display: block; width: 84px; height: 96px; color: inherit; }
+  .search-icon-circle {
+    position: relative; top: -8px; left: 0;
+    width: 43px; height: 43px;
+    border: 15px solid currentColor; border-radius: 9999px;
+    background: transparent;
+    transition: 0.5s ease all;
+  }
+  .search-icon-handle {
+    position: absolute; top: 68px; left: 43px;
+    width: 45px; height: 15px; border-radius: 10px;
+    background: transparent;
+    transform: rotateZ(52deg);
+    transition: 0.5s ease all;
+  }
+  .search-icon-handle::before,
+  .search-icon-handle::after {
+    content: "";
+    position: absolute; bottom: 0; right: 0;
+    width: 45px; height: 15px; border-radius: 10px;
+    background: currentColor;
+    transform: rotateZ(0);
+    transition: 0.5s ease all;
+  }
+
+  /* états au survol / focus clavier / focus du champ */
+  .search-btn:hover .search-icon-circle,
+  .search-btn:focus-visible .search-icon-circle,
+  .search-btn:focus-within .search-icon-circle {
+    top: -1px; width: 67px; height: 15px;
+    border-width: 0; background: currentColor; border-radius: 20px;
+  }
+  .search-btn:hover .search-icon-handle,
+  .search-btn:focus-visible .search-icon-handle,
+  .search-btn:focus-within .search-icon-handle {
+    top: 50%; left: 56px; width: 25px; margin-top: -9px;
+    transform: rotateZ(0);
+  }
+  .search-btn:hover .search-icon-handle::before,
+  .search-btn:focus-visible .search-icon-handle::before,
+  .search-btn:focus-within .search-icon-handle::before {
+    bottom: 11px; transform: rotateZ(52deg);
+  }
+  .search-btn:hover .search-icon-handle::after,
+  .search-btn:focus-visible .search-icon-handle::after,
+  .search-btn:focus-within .search-icon-handle::after {
+    bottom: -11px; transform: rotateZ(-52deg);
+  }
+  .search-btn:hover .search-icon-handle::before,
+  .search-btn:hover .search-icon-handle::after,
+  .search-btn:focus-visible .search-icon-handle::before,
+  .search-btn:focus-visible .search-icon-handle::after,
+  .search-btn:focus-within .search-icon-handle::before,
+  .search-btn:focus-within .search-icon-handle::after {
+    right: -6px; width: 40px;
+  }
+
+  /* placeholder rose (optionnel) */
+  .placeholder-rose::placeholder { color: #eed57a; }
+  
+  /* text popcorn */
+
+  .brand-logo {
+    /* base */
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: .9;
+    letter-spacing: -.175ch;
+
+    /* taille responsive pour une navbar */
+    font-size: clamp(1.25rem, 0.6rem + 2.4vw, 2.5rem);
+
+    /* couleurs/effet */
+    color: #fff;                     /* remplissage blanc */
+    -webkit-text-stroke: 3px #000;   /* contour noir (Chrome/Safari/Edge) */
+    text-shadow: 6px 6px 0 #000;     /* ombre portée pour renfort */
+  }
+
+  /* FilmCard */
+  .no-scrollbar::-webkit-scrollbar { width: 0; height: 0; }
+  .no-scrollbar::-webkit-scrollbar-thumb { display: none; }
+
+  /* Firefox + Edge */
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+}
