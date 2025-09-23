@@ -1,0 +1,39 @@
+# --- Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# --- Dépendances & builds
+node_modules/
+dist/
+dist-ssr/
+.vite/
+*.tsbuildinfo
+
+# --- Environnements (ne JAMAIS commiter les vrais secrets)
+.env
+.env.local
+.env.*.local
+!.env.example    # <-- garder l'exemple dans le dépôt
+
+# --- Tests & coverage
+coverage/
+.vitest/
+
+# --- Éditeur / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# --- Hébergeurs / outils divers
+.vercel/
+.netlify/
+.eslintcache
+*.patch
+*.orig
